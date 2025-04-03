@@ -38,10 +38,24 @@ function playRound(humanSelection, computerSelection){
     
     if(humanScore === 5){
         resultMessage += `You are the Winner!`;
+        reset();
     }else if(computerScore === 5){
         resultMessage += `Computer is the Winner!`;
+        reset();
     }
     resultDiv.innerHTML = resultMessage;
+}
+
+function reset(){
+    let resetAction = document.getElementById("reset");
+    let resetButton = `<button id="resetButton">Reset</button>`;
+    resetAction.innerHTML = resetButton;
+
+    document.querySelector('#resetButton').addEventListener("click", () =>{
+        location.reload();
+    })
+
+
 }
 
 document.querySelector('#rock').addEventListener("click", () => {
@@ -67,3 +81,4 @@ document.querySelector('#scissor').addEventListener("click", () => {
     playRound("scissor", computerSelection);
     }
 })
+
