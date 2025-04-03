@@ -6,51 +6,64 @@ function getComputerChoice(){
     else return "scissor";
 }
 
-function getHumanChoice(){
-    let humanAnswer = prompt("Enter your choice(Best of 5): ").toLowerCase();
-    console.log(humanAnswer);
-
-    while(!["rock", "paper", "scissor"].includes(humanAnswer)){
-        humanAnswer = prompt("Invalied Choice. Please enter rock, paper, scissor");
-    }
-    
-    return humanAnswer;
-}
-
-let humanScore = 0;
+let humanScore = 0; 
 let computerScore = 0;
 
-function playRound(humanSelection, computerSelection){
-    console.log(`You chose: ${humanSelection}`);
-    console.log(`Computer chose: ${computerSelection}`);
+function playRound(humanSelection, computerSelection){  
+    let resultDiv = document.getElementById("results");
+
+    let resultMessage = `You chose: ${humanSelection} <br> computer chose: ${computerSelection} </br>`;
 
     if(humanSelection === computerSelection){
-        console.log(`its a draw!`);
-        return; 
+        resultMessage += `Its a draw!`;
     }
     else if(humanSelection === "rock" && computerSelection === "scissor"){
         humanScore++;
-        console.log(`You Win!`);
+       resultMessage += `You Win!`;
     }
     else if(humanSelection === "paper" && computerSelection === "rock"){
         humanScore++;
-        console.log(`You Win!`);
+        resultMessage += `You Win!`;
     }
     else if(humanSelection === "scissor" && computerSelection === "paper"){
         humanScore++;
-        console.log(`You Win!`);
+        resultMessage += `You Win!`;
     }
     else{
         computerScore++
-        console.log(`You Lose!`);
-    }
-}
+        resultMessage += `You Lose!`;
+    }   
 
-while(computerScore < 5 && humanScore < 5){
+    resultMessage += `<br> Your score: ${humanScore}<br>Computer score: ${computerScore}</br>`;
     
-    let humanSelection = getHumanChoice();
-    let computerSelection = getComputerChoice();
-
-    playRound(humanSelection, computerSelection);
-    console.log("Your score: " , humanScore, "Computer score: ", computerScore);  
+    if(humanScore === 5){
+        resultMessage += `You are the Winner!`;
+    }else if(computerScore === 5){
+        resultMessage += `Computer is the Winner!`;
+    }
+    resultDiv.innerHTML = resultMessage;
 }
+
+document.querySelector('#rock').addEventListener("click", () => {
+    if(humanScore < 5 && computerScore < 5){
+        let computerSelection = getComputerChoice();
+        console.log("Button Clicked");
+        playRound("rock", computerSelection);   
+    }
+})
+
+document.querySelector('#paper').addEventListener("click", () => {
+    if(humanScore < 5 && computerScore < 5){
+        let computerSelection = getComputerChoice();
+        console.log("Button Clicked");
+        playRound("paper", computerSelection);
+    } 
+})
+
+document.querySelector('#scissor').addEventListener("click", () => {
+    if(humanScore < 5 && computerScore < 5){
+    let computerSelection = getComputerChoice();
+    console.log("Button Clicked");
+    playRound("scissor", computerSelection);
+    }
+})
