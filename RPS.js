@@ -54,8 +54,6 @@ function reset(){
     document.querySelector('#resetButton').addEventListener("click", () =>{
         location.reload();
     })
-
-
 }
 
 document.querySelector('#rock').addEventListener("click", () => {
@@ -81,4 +79,3 @@ document.querySelector('#scissor').addEventListener("click", () => {
     playRound("scissor", computerSelection);
     }
 })
-
